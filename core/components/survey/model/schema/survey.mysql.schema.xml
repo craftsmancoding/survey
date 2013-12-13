@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="survey" version="1.0" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+
+    <!-- ! Survey -->
+    <!-- A survey here represents a set of questions -->    
+	<object class="Survey" table="surveys" extends="xPDOObject">
+		<field key="survey_id" dbtype="int" precision="4" phptype="integer" null="false" index="pk" generated="native" />
+        <field key="user_id" dbtype="int" precision="11" phptype="integer" null="true" comment="MODX user id"/>
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="date_open" dbtype="datetime" phptype="datetime" comment="When can users start filling out this survey?"/>
+		<field key="date_closed" dbtype="datetime" phptype="datetime" comment="When will responses be closed?"/>
+        <field key="is_active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
+        <field key="is_editable" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" comment="If editable, then users can change their answers after submitting them"/>
+		<field key="seq" dbtype="int" precision="3" phptype="integer" null="true" />
+		<field key="timestamp_created" dbtype="timestamp" phptype="timestamp" null="true" default="CURRENT_TIMESTAMP" />
+		<field key="timestamp_modified" dbtype="timestamp" phptype="timestamp" null="true" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+			<column key="survey_id" collation="A" null="false" />
+		</index>
+		
+		<composite alias="Questions" class="Question" local="survey_id" foreign="survey_id" cardinality="many" owner="local" />
+		<composite alias="Responses" class="Response" local="survey_id" foreign="survey_id" cardinality="many" owner="local" />
+		<composite alias="Data" class="Data" local="survey_id" foreign="survey_id" cardinality="many" owner="local" />
+	</object>
+
+    <!-- ! Question -->
+    <object class="Question" table="questions" extends="xPDOObject">
+        <field key="question_id" dbtype="int" precision="11" phptype="integer" null="false" index="pk"  generated="native" />
+        <field key="survey_id" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="user_id" dbtype="int" precision="11" phptype="integer" null="true" comment="MODX user id"/>
+        <field key="text" dbtype="mediumtext" phptype="string" null="false" default="" comment="The actual question"/>
+        <field key="type" dbtype="varchar" precision="16" phptype="string" default="text" null="false" comment="Identifies the type of response (e.g. text, dropdown)"/>
+        <field key="options" dbtype="varchar" precision="255" phptype="string" null="true" comment="optionally used by some types, e.g. dropdown req's a list of options"/>
+        <field key="page" dbtype="int" precision="11" phptype="integer" null="false" comment="optionally used to group questions into pages"/>
+        <field key="is_active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" comment="Used to disable/enable products"/>
+        <field key="is_required" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" comment="Required Qs must be answered before the survey can be completed."/>        
+        <field key="seq" dbtype="int" precision="11" phptype="integer" null="true" />
+        
+		<field key="timestamp_created" dbtype="timestamp" phptype="timestamp" null="true" default="CURRENT_TIMESTAMP" />
+		<field key="timestamp_modified" dbtype="timestamp" phptype="timestamp" null="true" />
+        
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+			<column key="question_id" collation="A" null="false" />
+		</index>
+			
+		<aggregate alias="Survey" class="Survey" local="survey_id" foreign="survey_id" cardinality="one" owner="foreign" />
+		<composite alias="Data" class="Data" local="question_id" foreign="question_id" cardinality="many" owner="local" />
+		
+    </object>
+
+
+	<!-- ! Response -->
+	<!-- A Response here means a person's set of answers (collectively) to a set of questions (collectively) -->
+	<object class="Response" table="responses" extends="xPDOObject">
+		<field key="response_id" dbtype="int" precision="11" phptype="integer" null="false" index="pk"  generated="native" />
+		<field key="survey_id" dbtype="int" precision="11" phptype="integer" null="false" />
+		<field key="user_id" dbtype="int" precision="11" phptype="integer" null="true" comment="MODX user id"/>
+		<field key="identifier" dbtype="varchar" precision="255" phptype="string" null="false" comment="Used to anonymize"/>
+		<field key="ip" dbtype="varchar" precision="16" phptype="string" null="true" />
+		<field key="user_agent" dbtype="mediumtext" phptype="string" null="false" default="" comment="For a papertrail"/>
+		<field key="is_complete" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" comment="Goes to 1 when all required questions are answered"/>
+		
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+			<column key="response_id" collation="A" null="false" />
+		</index>
+        <index alias="identifier" name="identifier" primary="false" unique="true"  type="BTREE">
+			<column key="identifier" collation="A" null="false" />
+		</index>
+
+	</object>
+
+    <!-- ! Data -->
+    <!-- Individual response to a single question -->
+	<object class="Data" table="data" extends="xPDOObject">
+		<field key="data_id" dbtype="int" precision="11" phptype="integer" null="false"/>
+        <field key="survey_id" dbtype="int" precision="11" phptype="integer" null="false"/>
+        <field key="response_id" dbtype="int" precision="11" phptype="integer" null="false"/>
+        <field key="question_id" dbtype="int" precision="11" phptype="integer" null="false"/>
+        <field key="value" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="timestamp_created" dbtype="timestamp" phptype="timestamp" null="true" default="CURRENT_TIMESTAMP" />
+		<field key="timestamp_modified" dbtype="timestamp" phptype="timestamp" null="true" />        
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+			<column key="data_id" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="Survey" class="Survey" local="survey_id" foreign="survey_id" cardinality="one" owner="foreign" />
+        <aggregate alias="Response" class="Response" local="response_id" foreign="response_id" cardinality="one" owner="foreign" />
+        <aggregate alias="Question" class="Question" local="question_id" foreign="question_id" cardinality="one" owner="foreign" />
+	</object>
+
+</model>
