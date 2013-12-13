@@ -3,7 +3,7 @@ return array(
     array(
         'text'=>'Survey',
         'parent'=>'components',
-        'action' => 0,
+        'action' => 0, // needs a placeholder value to avoid warnings: will update to fk from Action object
         'description' => 'Create and Manage Surveys',
         'icon'=>'',
         'menuindex'=>'',

@@ -16,8 +16,9 @@ if ($regenerate_classes) {
     delete_class_files($mysql_class_dir);
 }
 */
-
-$generator->parseSchema($core_path.'components/survey/model/schema/survey.mysql.schema.xml',$core_path.'components/survey/model/');
+// parsing schema should never be done in a migration: it generates model files, and you should pull those down along with 
+// the rest of the repo.
+//$generator->parseSchema($core_path.'components/survey/model/schema/survey.mysql.schema.xml',$core_path.'components/survey/model/');
 
 
 $modx->addPackage('survey',$core_path.'components/survey/model/','survey_');
