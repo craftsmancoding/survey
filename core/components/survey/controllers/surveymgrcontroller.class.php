@@ -8,14 +8,13 @@ class SurveyMgrController{
     public $core_path;
     public $assets_url;
     public $connector_url;
-    public $upload_url;
     public $mgr_controller_url;
-    public $max_image_width = 300;
-    
+
     public function __construct($modx) {
         $this->modx = &$modx;
         $this->core_path = $this->modx->getOption('survey.core_path','',MODX_CORE_PATH);
-        $this->modx->addPackage('survey',$this->core_path.'components/survey/model/');
+
+        $this->modx->addPackage('survey',$this->core_path.'components/survey/model/','survey_');
         $this->assets_url = $this->modx->getOption('survey.assets_url', null, MODX_ASSETS_URL);
         $this->connector_url = $this->assets_url.'components/survey/connector.php?f=';
         $this->upload_dir = 'images/survey/'; // path & url: rel to MODX_ASSETS_PATH & MODX_ASSETS_URL
@@ -49,7 +48,6 @@ class SurveyMgrController{
     	}
     
     	return $output;
-    
     }
     
     /**
@@ -58,9 +56,39 @@ class SurveyMgrController{
      */
     public function show_all($args) {
         $data = array();
+        $data['surveys'] = $this->json_surveys(array('is_active'=>1),true);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('list.php',$data);
+    }
+
+    /**
+     * get all surveys
+     * @param boolean $raw if true, results are returned as PHP array default: false
+     * @return mixed A JSON array (string), a PHP array (array), or false on fail (false)
+     */
+    public function json_surveys($args,$raw=false) {
+        $criteria = $this->modx->newQuery('Survey');
+        if (isset($args['is_active'])) {
+            $criteria->where(array('is_active' => (int) $this->modx->getOption('is_active',$args)));
+        }
+        $total_pages = $this->modx->getCount('Survey',$criteria);
+        
+        $pages = $this->modx->getCollection('Survey',$criteria);
+
+        // return $criteria->toSQL(); <-- useful for debugging
+        // Init our array
+        $data = array(
+            'results'=>array(),
+            'total' => $total_pages,
+        );
+        foreach ($pages as $p) {
+            $data['results'][] = $p->toArray();
+        }
+        if ($raw) {
+            return $data;
+        }
+        return json_encode($data);
     }
             
 }

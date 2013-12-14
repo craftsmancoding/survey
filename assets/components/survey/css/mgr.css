@@ -298,7 +298,6 @@ input,
 button,
 select,
 textarea {
-  font-size: 14px;
   font-weight: normal;
   line-height: 20px;
 }
@@ -311,7 +310,6 @@ textarea {
 label {
   display: block;
   color: #707070;
-  font-size: 12px;
   font-weight: bold;
 }
 select,
@@ -334,7 +332,6 @@ input[type="color"],
   display: inline-block;
   height: 20px;
   padding: 4px 6px;
-  font-size: 14px;
   line-height: 20px;
   color: #555555;
   -webkit-border-radius: 2px;
@@ -816,7 +813,6 @@ select:focus:required:invalid:focus {
   position: relative;
   margin-bottom: 0;
   *margin-left: 0;
-  font-size: 14px;
   vertical-align: top;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -837,7 +833,6 @@ select:focus:required:invalid:focus {
   height: 20px;
   min-width: 16px;
   padding: 4px 5px;
-  font-size: 14px;
   font-weight: normal;
   line-height: 20px;
   text-align: center;
@@ -1063,7 +1058,6 @@ legend + .control-group {
   *zoom: 1;
   padding: 4px 14px;
   margin-bottom: 0;
-  font-size: 14px;
   line-height: 20px;
   *line-height: 20px;
   text-align: center;
@@ -1930,10 +1924,7 @@ input[type="submit"].btn.btn-mini {
 .btn-group > .btn + .btn {
   margin-left: -1px;
 }
-.btn-group > .btn,
-.btn-group > .dropdown-menu {
-  font-size: 14px;
-}
+
 .btn-group > .btn-mini {
   font-size: 11px;
 }
@@ -2125,7 +2116,6 @@ input[type="submit"].btn.btn-mini {
 .nav-header {
   display: block;
   padding: 3px 15px;
-  font-size: 11px;
   font-weight: bold;
   line-height: 20px;
   color: #999999;
@@ -2479,7 +2469,6 @@ input[type="submit"].btn.btn-mini {
   display: block;
   padding: 10px 20px 10px;
   margin-left: -20px;
-  font-size: 20px;
   font-weight: 200;
   color: #777777;
   text-shadow: 0 1px 0 #ffffff;
@@ -2561,7 +2550,6 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 0;
   padding: 4px 14px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
   font-weight: normal;
   line-height: 1;
   -webkit-border-radius: 15px;
@@ -3219,7 +3207,6 @@ a.thumbnail:hover {
   height: 100%;
   color: #ffffff;
   float: left;
-  font-size: 12px;
   text-align: center;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #0e90d2;
@@ -3345,27 +3332,7 @@ a.thumbnail:hover {
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
-.hero-unit {
-  padding: 60px;
-  margin-bottom: 30px;
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.hero-unit h1 {
-  margin-bottom: 0;
-  font-size: 60px;
-  line-height: 1;
-  color: inherit;
-  letter-spacing: -1px;
-}
-.hero-unit p {
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  color: inherit;
-}
+
 .tooltip {
   position: absolute;
   z-index: 1030;
@@ -3474,7 +3441,6 @@ a.thumbnail:hover {
 .popover-title {
   margin: 0;
   padding: 8px 14px;
-  font-size: 14px;
   font-weight: normal;
   line-height: 18px;
   background-color: #f7f7f7;
@@ -3926,7 +3892,6 @@ a.thumbnail:hover {
   width: 40px;
   height: 40px;
   margin-top: -20px;
-  font-size: 60px;
   font-weight: 100;
   line-height: 30px;
   color: #ffffff;
@@ -3972,7 +3937,7 @@ a.thumbnail:hover {
 .well {
   min-height: 20px;
   padding: 19px;
-  margin: 20px 0;
+  margin: 10px 0;
   background-color: #fff;
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
@@ -4000,7 +3965,6 @@ a.thumbnail:hover {
 }
 .close {
   float: right;
-  font-size: 20px;
   font-weight: bold;
   line-height: 20px;
   color: #000000;
@@ -4100,10 +4064,9 @@ button.close {
 .cmp-header {
   clear:both;
 }
-.header-title {
-  float: left;
-}
+
 .buttons-wrapper {
+  margin: 20px 0 10px;
   float: right;
 }
 
