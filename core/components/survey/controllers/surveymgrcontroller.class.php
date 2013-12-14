@@ -71,10 +71,46 @@ class SurveyMgrController{
         $data = array();
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
-        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/jquery-ui.js');
-        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/jquery.tabify.js');
-        $data['mgr_controller_url'] = $this->mgr_controller_url;
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+            var connector_url = "'.$this->connector_url.'";
+            </script>
+        ');
         return $this->_load_view('create.php',$data);
+    }
+
+    /**
+    * Save the Survey. $args includes all posted data. "action" determines the action here.
+    *
+    */
+    public function survey_save($args) {
+
+        $out = array(
+            'success' => true,
+            'msg' => ''
+        );
+        
+        $action = $this->modx->getOption('action', $args);
+        unset($args['action']);        
+        
+        switch ($action) {
+            case 'update':
+                // Update Survey Here 
+                break;
+            case 'delete':
+                //Delete Survey
+                break;
+            case 'create':
+            default:
+                $Survey = $this->modx->newObject('Survey');    
+                $Survey->fromArray($args);
+                if (!$Survey->save()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to save Survey.';    
+                }
+                $out['msg'] = 'Survey created successfully.';
+        }
+                
+        return json_encode($out);
     }
 
     /**

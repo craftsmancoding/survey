@@ -1,8 +1,27 @@
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-
 <script>
 	$(function() {
-		$('#cmp-tab').tabify();
+		$('#create-survey').on('submit',function(e){
+			var values = $(this).serialize();
+			console.log(values);
+			var url = connector_url + 'survey_save';
+
+			$.post( url+"&action=create", values, function(data){
+			    data = $.parseJSON(data);
+			  $('.cmp-msg').show();
+			    if (data.success) {
+			       $('#cmp-result').html('Success');
+			       $('#msg').addClass('success');
+			    }
+			    else {
+			       $('#cmp-result').html('Error');                
+			       $('#msg').addClass('error');
+			    }
+			    
+			    $('#cmp-result-msg').html(data.msg);        
+			    $('.cmp-msg').delay(3200).fadeOut(300);
+			});
+		    e.preventDefault();
+	    });
 	});
 </script>
 
@@ -22,8 +41,7 @@
 			</div>
 				
 			<div class="cmp-buttons-wrapper">
-	           
-	                <button class="btn" id="product_update">Save</button>
+	                <button type="submit" class="btn" id="survey-create">Save</button>
 					<a class="btn" href="#">Close</a>
 			</div>
 		</div>
