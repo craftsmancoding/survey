@@ -18,12 +18,16 @@
 .table th,
 .table td {
   padding: 4px;
-  line-height: 20px;
   text-align: left;
   border-top: 1px solid #dddddd;
 }
 .table th {
   font-weight: bold;
+}
+
+.table thead {
+  background: #626262;
+  color: #fff;
 }
 .table thead th {
   vertical-align: bottom;
@@ -348,6 +352,7 @@ textarea {
   height: auto;
 }
 textarea,
+select,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -4140,7 +4145,9 @@ button.close {
 }
 
 
-
+#ext-gen47 {
+  display: none;
+}
 
 /* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements.
    j.mp/bestclearfix */
