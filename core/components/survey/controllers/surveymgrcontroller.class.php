@@ -9,6 +9,7 @@ class SurveyMgrController{
     public $assets_url;
     public $connector_url;
     public $mgr_controller_url;
+    public $jquery_url;
 
     public function __construct($modx) {
         $this->modx = &$modx;
@@ -17,7 +18,7 @@ class SurveyMgrController{
         $this->modx->addPackage('survey',$this->core_path.'components/survey/model/','survey_');
         $this->assets_url = $this->modx->getOption('survey.assets_url', null, MODX_ASSETS_URL);
         $this->connector_url = $this->assets_url.'components/survey/connector.php?f=';
-        $this->upload_dir = 'images/survey/'; // path & url: rel to MODX_ASSETS_PATH & MODX_ASSETS_URL
+        $this->jquery_url = $this->assets_url.'components/survey/js/jquery-2.0.3.min.js';
         $a = (int) $this->modx->getOption('a',$_GET);
         if (!$a) {
             $Action = $this->modx->getObject('modAction', array('namespace'=>'survey','controller'=>'controllers/index'));
@@ -60,6 +61,20 @@ class SurveyMgrController{
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('list.php',$data);
+    }
+
+    /**
+    * Create New Survey
+    **/
+    public function create($args) 
+    {
+        $data = array();
+        $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
+        $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/jquery-ui.js');
+        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/jquery.tabify.js');
+        $data['mgr_controller_url'] = $this->mgr_controller_url;
+        return $this->_load_view('create.php',$data);
     }
 
     /**

@@ -4060,9 +4060,49 @@ button.close {
   -webkit-font-smoothing: antialiased;
 }
 
+/**tab**/
+.menu { padding: 0;}
+.menu li { display: inline; }
+.menu li a { 
+  
+  padding: 7px 10px; 
+  float:left; 
+  text-decoration: none; 
+  font-weight: bold;
+  margin-right: 2px;
 
-.cmp-header {
-  clear:both;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#90b643", endColorstr="#617a2d");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#90b643), to(#617a2d));
+  background-image: -moz-linear-gradient(top, #90b643, #617a2d);
+  background-image: -ms-linear-gradient(top, #90b643, #617a2d);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #90b643), color-stop(100%, #617a2d));
+  background-image: -webkit-linear-gradient(top, #90b643, #617a2d);
+  background-image: -o-linear-gradient(top, #90b643, #617a2d);
+  background-image: linear-gradient(#90b643, #617a2d);
+  border-color: #617a2d #617a2d hsl(80, 46%, 29%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 5px 5px 0 0; 
+  -moz-border-radius: 5px 5px 0 0; 
+  -webkit-border-radius: 5px 5px 0 0; 
+  border: 1px solid #999999;
+  border-bottom: none;
+
+
+
+}
+.menu li.active a { background: #fff; color: #000 !important;}
+.content { float: left; clear: both; border: 1px solid #999999; border-top: none;background: #fff; padding: 10px 20px 20px; width: 95%; }
+
+
+.cmp-header .cmp-header-title {
+  float: left;
+}
+
+
+.cmp-header .cmp-buttons-wrapper {
+  float: right;
 }
 
 .buttons-wrapper {
@@ -4098,6 +4138,7 @@ button.close {
 .no-top-border td {
   border: none;
 }
+
 
 
 

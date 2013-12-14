@@ -1,4 +1,4 @@
-<div id="modx-panel-workspace" class="x-plain container">
+<div class="container">
 
 	<div class="cmp-msg">
 		<div id="cmp-result"></div>
@@ -13,7 +13,7 @@
 			</div>
 			<div class="cmp-header clearfix">
 				<div class="buttons-wrapper">
-			            <a class="btn btn-custom" href="<?php print $data['mgr_controller_url']; ?>update">Create New Survey</a>
+			            <a class="btn btn-custom" href="<?php print $data['mgr_controller_url']; ?>create">Create New Survey</a>
 			        	<a class="btn" href="#">Close</a>
 				</div>
 
