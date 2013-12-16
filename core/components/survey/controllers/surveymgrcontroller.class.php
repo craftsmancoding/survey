@@ -73,9 +73,31 @@ class SurveyMgrController{
         $this->modx->regClientStartupScript($this->jquery_url);
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
             var connector_url = "'.$this->connector_url.'";
+            var mgr_controller_url = "'.$this->mgr_controller_url.'";
             </script>
         ');
         return $this->_load_view('create.php',$data);
+    }
+
+    /**
+    * Update a Survey
+    **/
+    public function update($args) 
+    {
+        $survey_id = (int) $this->modx->getOption('survey_id', $args);
+        if (!$Survey = $this->modx->getObject('Survey', $survey_id)) {        
+            return 'Survey not found : '.$survey_id;
+        }
+        
+        $data = $Survey->toArray();
+
+        $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
+        $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+            var connector_url = "'.$this->connector_url.'";
+            </script>
+        ');
+        return $this->_load_view('update.php',$data);
     }
 
     /**
@@ -107,6 +129,7 @@ class SurveyMgrController{
                     $out['success'] = false;
                     $out['msg'] = 'Failed to save Survey.';    
                 }
+                $out['suvey_id'] = $this->modx->lastInsertId();
                 $out['msg'] = 'Survey created successfully.';
         }
                 
