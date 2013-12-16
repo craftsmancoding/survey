@@ -1,3 +1,28 @@
+<script>
+	$(function(){
+		$('#update-survey').on('submit',function(e){
+			var values = $(this).serialize();
+			var url = connector_url + 'survey_save';
+
+			$.post( url+"&action=update", values, function(data){
+			    data = $.parseJSON(data);
+			  $('.cmp-msg').show();
+			    if (data.success) {
+			       $('#cmp-result').html('Success');
+			       $('#msg').addClass('success');
+			    }
+			    else {
+			       $('#cmp-result').html('Error');                
+			       $('#msg').addClass('error');
+			    }
+			    
+			    $('#cmp-result-msg').html(data.msg);        
+			    jQuery('.cmp-msg').delay(3200).fadeOut(300);
+			});
+		    e.preventDefault();
+	    });
+	});
+</script>
 <div class="cmp-msg">
 	<div id="cmp-result"></div>
 	<div id="cmp-result-msg"></div>
@@ -6,7 +31,7 @@
 
 <div class="container">
 
-	<form method="post" id="create-survey" action="#">
+	<form method="post" id="update-survey" action="#">
 
 		<div class="cmp-header clearfix">
 			<div class="cmp-header-title">
@@ -24,6 +49,7 @@
                     <tbody>
                          <tr>
                             <td style="vertical-align: top;">
+                            	<input type="hidden" id="survey_id" name="survey_id" value="<?php print $data['survey_id']; ?>" />
                                  <label for="title">Name</label>
                                 <input type="text" class="span8" id="name" name="name" value="<?php print $data['name']; ?>"/>
                                  <label for="description">Description</label>
@@ -66,18 +92,21 @@
 		          <tr>
 		            <th>ID</th>
 		            <th>Name</th>
-		            <th>Description</th>
+		            <th>Type</th>
 		            <th>Active</th>
 		          </tr>
 		        </thead>
 		        <tbody>
-					
-		                    <tr>
-					            <td>1</td>
-					            <td>Test</td>
-					            <td>Testing...</td>
-					            <td><strong>Yes</strong></td>
-					        </tr>
+					<?php if (!empty($data['questions'])) : ?>
+							<?php foreach($data['questions']['results'] as $question) : ?>
+			                    <tr>
+						            <td><?php print $question['question_id']; ?></td>
+						            <td><?php print $question['text']; ?></td>
+						            <td><?php print $question['type']; ?></td>
+						            <td><strong><?php print ($question['is_active'] == 1) ? 'Yes' : 'No'; ?></strong></td>
+						        </tr>
+							<?php endforeach; ?>
+					<?php endif; ?>
 		        </tbody>
 		      </table>
 

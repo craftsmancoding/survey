@@ -93,8 +93,8 @@ class SurveyMgrController{
         if (!$Survey = $this->modx->getObject('Survey', $survey_id)) {        
             return 'Survey not found : '.$survey_id;
         }
-        
         $data = $Survey->toArray();
+        $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
 
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
@@ -121,7 +121,20 @@ class SurveyMgrController{
         
         switch ($action) {
             case 'update':
-                // Update Survey Here 
+               case 'update':
+                $Survey = $this->modx->getObject('Survey',$this->modx->getOption('survey_id', $args));
+                if (!$Survey) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Invalid Survey.';
+                    return json_encode($out);
+                }
+                $Survey->fromArray($args);
+                if (!$Survey->save()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to update Survey.';
+                    $out['survey_id'] = $Survey->get('survey_id');
+                }
+                $out['msg'] = 'Survey updated successfully.';    
                 break;
             case 'delete':
                 //Delete Survey
@@ -154,6 +167,41 @@ class SurveyMgrController{
         $total_pages = $this->modx->getCount('Survey',$criteria);
         
         $pages = $this->modx->getCollection('Survey',$criteria);
+
+        // return $criteria->toSQL(); <-- useful for debugging
+        // Init our array
+        $data = array(
+            'results'=>array(),
+            'total' => $total_pages,
+        );
+        foreach ($pages as $p) {
+            $data['results'][] = $p->toArray();
+        }
+        if ($raw) {
+            return $data;
+        }
+        return json_encode($data);
+    }
+
+    /**
+    * get all questions
+    * @param boolean $raw if true, results are returned as PHP array default: false
+    * @return mixed A JSON array (string), a PHP array (array), or false on fail (false)
+    */
+    public function json_questions($args,$raw=false) {
+        $survey_id = (int) $this->modx->getOption('survey_id',$args);
+        $criteria = $this->modx->newQuery('Question');
+        if (isset($args['is_active'])) {
+            $criteria->where(array('is_active' => (int) $this->modx->getOption('is_active',$args)));
+        }
+
+        if ($survey_id) {
+            $criteria->where(array('survey_id'=>$survey_id));
+        }
+
+        $total_pages = $this->modx->getCount('Question',$criteria);
+        
+        $pages = $this->modx->getCollection('Question',$criteria);
 
         // return $criteria->toSQL(); <-- useful for debugging
         // Init our array
