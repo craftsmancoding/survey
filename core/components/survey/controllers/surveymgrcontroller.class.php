@@ -59,6 +59,11 @@ class SurveyMgrController{
         $data = array();
         $data['surveys'] = $this->json_surveys(array('is_active'=>1),true);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
+        $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+            var mgr_controller_url = "'.$this->mgr_controller_url.'";
+            </script>
+        ');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('list.php',$data);
     }
@@ -129,7 +134,7 @@ class SurveyMgrController{
                     $out['success'] = false;
                     $out['msg'] = 'Failed to save Survey.';    
                 }
-                $out['suvey_id'] = $this->modx->lastInsertId();
+                $out['survey_id'] = $this->modx->lastInsertId();
                 $out['msg'] = 'Survey created successfully.';
         }
                 

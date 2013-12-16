@@ -19,7 +19,7 @@
 			    
 			    $('#cmp-result-msg').html(data.msg);        
 			    window.setTimeout(function() {
-				    window.location.href = mgr_controller_url+'update&survey_id='+data.suvey_id;
+				    window.location.href = mgr_controller_url+'update&survey_id='+data.survey_id;
 				}, 1500);
 			});
 		    e.preventDefault();

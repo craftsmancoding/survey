@@ -1,3 +1,11 @@
+<script>
+	$(function(){
+		$('#survey-list tr').on('click',function(){
+			var survey_id = $(this).data('survey_id');
+			window.location.href = mgr_controller_url+'update&survey_id='+survey_id;
+		});
+	});
+</script>
 <div class="container">
 
 	<div class="cmp-msg">
@@ -17,7 +25,7 @@
 			        	<a class="btn" href="#">Close</a>
 				</div>
 
-				<table class="table table-hover">
+				<table id="survey-list" class="table table-hover">
 			        <thead>
 			          <tr>
 			            <th>ID</th>
@@ -29,7 +37,7 @@
 			        <tbody>
 						<?php if ($data['surveys']) : ?>
 							<?php foreach($data['surveys']['results'] as $survey) : ?>
-			                    <tr>
+			                    <tr class="survey-row" data-survey_id="<?php print $survey['survey_id']; ?>">
 						            <td><?php print $survey['survey_id']; ?></td>
 						            <td><?php print $survey['name']; ?></td>
 						            <td><?php print $survey['description']; ?></td>
