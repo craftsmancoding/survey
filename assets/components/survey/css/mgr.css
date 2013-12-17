@@ -4146,7 +4146,8 @@ button.close {
 
 
 
-#survey-list tr {
+#survey-list tr,
+#question-tbl tr {
   cursor: pointer;
 }
 
@@ -4158,10 +4159,6 @@ button.close {
 }
 
 #modal-msg {
-  display: none;
-}
-
-#options-wrap {
   display: none;
 }
 

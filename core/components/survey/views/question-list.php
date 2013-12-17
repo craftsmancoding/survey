@@ -1,5 +1,12 @@
 <div class="question-list-inner">
-	<table class="table table-hover">
+	<script>
+		$(function(){
+			$('question-tbl tr').on('click',function(){
+				
+			});
+		});
+	</script>
+	<table id="question-tbl" class="table table-hover">
 	    <thead>
 	      <tr>
 	        <th>ID</th>
@@ -12,7 +19,7 @@
 
 			<?php if (!empty($data['questions']['results'])) : ?>
 					<?php foreach($data['questions']['results'] as $question) : ?>
-	                    <tr>
+	                    <tr data-toggle="modal" data-target="#update-question-modal">
 				            <td><?php print $question['question_id']; ?></td>
 				            <td><?php print $question['text']; ?></td>
 				            <td><?php print $question['type']; ?></td>

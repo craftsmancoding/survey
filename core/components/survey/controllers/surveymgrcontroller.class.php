@@ -102,6 +102,8 @@ class SurveyMgrController{
             return 'Survey not found : '.$survey_id;
         }
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
+        $data['question-modal'] = $this->_load_view('question-modal.php',$data);
+
         return $this->_load_view('question-list.php',$data);
     }
 
@@ -133,7 +135,7 @@ class SurveyMgrController{
         $data = $Survey->toArray();
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
         $question_data = array('survey_id'=>$survey_id);
-        $data['question-create'] = $this->_load_view('create-question.php',$question_data);
+        $data['question-modal'] = $this->_load_view('question-modal.php',$question_data);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
         $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
@@ -258,12 +260,14 @@ class SurveyMgrController{
      * @return mixed A JSON array (string), a PHP array (array), or false on fail (false)
      */
     public function json_surveys($args,$raw=false) {
+        $sort = $this->modx->getOption('sort',$args,'survey_id');
+        $dir = $this->modx->getOption('dir',$args,'ASC');
         $criteria = $this->modx->newQuery('Survey');
         if (isset($args['is_active'])) {
             $criteria->where(array('is_active' => (int) $this->modx->getOption('is_active',$args)));
         }
         $total_pages = $this->modx->getCount('Survey',$criteria);
-        
+        $criteria->sortby($sort,$dir);
         $pages = $this->modx->getCollection('Survey',$criteria);
 
         // return $criteria->toSQL(); <-- useful for debugging
@@ -288,6 +292,8 @@ class SurveyMgrController{
     */
     public function json_questions($args,$raw=false) {
         $survey_id = (int) $this->modx->getOption('survey_id',$args);
+        $sort = $this->modx->getOption('sort',$args,'question_id');
+        $dir = $this->modx->getOption('dir',$args,'ASC');
         $criteria = $this->modx->newQuery('Question');
         if (isset($args['is_active'])) {
             $criteria->where(array('is_active' => (int) $this->modx->getOption('is_active',$args)));
@@ -298,7 +304,7 @@ class SurveyMgrController{
         }
 
         $total_pages = $this->modx->getCount('Question',$criteria);
-        
+        $criteria->sortby($sort,$dir);
         $pages = $this->modx->getCollection('Question',$criteria);
 
         // return $criteria->toSQL(); <-- useful for debugging

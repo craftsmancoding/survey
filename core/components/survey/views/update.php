@@ -108,7 +108,7 @@
 
 			<!-- Modal -->
 			<div class="modal fade" id="question-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<?php print $data['question-create']; ?>
+				<?php print $data['question-modal']; ?>
 			</div><!-- /.modal -->
 			
 			<div class="loader-ajax">
