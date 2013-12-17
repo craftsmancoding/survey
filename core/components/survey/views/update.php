@@ -84,8 +84,13 @@
 			<p>Here you can Create Questions or Choose which Question you wish to edit.</p>
 		</div>
 			<div class="buttons-wrapper">
-		            <a class="btn btn-custom" href="#" >New Question</a>
+		            <a class="btn btn-custom" data-toggle="modal" data-target="#question-modal" href="#" >New Question</a>
 			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="question-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<?php print $data['question-create']; ?>
+			</div><!-- /.modal -->
 
 			<table class="table table-hover">
 		        <thead>
@@ -97,7 +102,7 @@
 		          </tr>
 		        </thead>
 		        <tbody>
-					<?php if (!empty($data['questions'])) : ?>
+					<?php if (!empty($data['questions']['results'])) : ?>
 							<?php foreach($data['questions']['results'] as $question) : ?>
 			                    <tr>
 						            <td><?php print $question['question_id']; ?></td>
@@ -106,6 +111,8 @@
 						            <td><strong><?php print ($question['is_active'] == 1) ? 'Yes' : 'No'; ?></strong></td>
 						        </tr>
 							<?php endforeach; ?>
+						<?php else : ?>
+			                <tr><td style="text-align: center;" colspan="4">No Question Found</td></tr>
 					<?php endif; ?>
 		        </tbody>
 		      </table>

@@ -35,7 +35,7 @@
 			          </tr>
 			        </thead>
 			        <tbody>
-						<?php if ($data['surveys']) : ?>
+						<?php if (empty($data['surveys']['results'])) : ?>
 							<?php foreach($data['surveys']['results'] as $survey) : ?>
 			                    <tr class="survey-row" data-survey_id="<?php print $survey['survey_id']; ?>">
 						            <td><?php print $survey['survey_id']; ?></td>
@@ -45,7 +45,7 @@
 						        </tr>
 					    	<?php endforeach; ?>
 			            <?php else : ?>
-			                <tr><td colspan="6">No Specs Found</td></tr>
+			                <tr><td colspan="4" style="text-align: center;">No Survey Found</td></tr>
 						<?php endif; ?>
 			        </tbody>
 			      </table>

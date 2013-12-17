@@ -95,9 +95,10 @@ class SurveyMgrController{
         }
         $data = $Survey->toArray();
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
-
+        $data['question-create'] = $this->_load_view('question-modal.php');
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
             var connector_url = "'.$this->connector_url.'";
             </script>

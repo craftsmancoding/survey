@@ -95,18 +95,12 @@
 		          <tr>
 		            <th>ID</th>
 		            <th>Name</th>
-		            <th>Description</th>
+		            <th>Type</th>
 		            <th>Active</th>
 		          </tr>
 		        </thead>
 		        <tbody>
-					
-		                    <tr>
-					            <td>1</td>
-					            <td>Test</td>
-					            <td>Testing...</td>
-					            <td><strong>Yes</strong></td>
-					        </tr>
+			         <tr><td style="text-align: center;" colspan="4">No Question Found</td></tr>
 		        </tbody>
 		      </table>
 
