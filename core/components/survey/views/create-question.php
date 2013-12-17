@@ -9,24 +9,35 @@
                 data: values,  
                 success: function( data )  
                 {
+                	console.log(data)
                      data = $.parseJSON(data);
 
 			    	if(data.success == true) {
 			    		$('#modal-msg').addClass('alert-success').html(data.msg).show();
 			    		$("#modal-msg").delay(1000).fadeOut(300);
 			    		window.setTimeout(function(){
-						     $('#modal-image').modal('hide');
+						     $('#question-modal').modal('hide');
 						}, 1000);
-						update_thumb(survey_id);
+						$( document ).on( "hidden.bs.modal", "#question-modal", function() {
+							 get_questions();
+						});
 			    	} else{
 			    		$('#modal-msg').addClass('alert-danger').html(data.msg).show();
-			    		$("#modal-msg").delay(3200).fadeOut(300);
+			    		$("#modal-msg").delay(1000).fadeOut(300);
 			    	}
 			    	
                 }
            });
 		    e.preventDefault();
 	    });
+
+	    $( "#type" ).change(function() {
+			if( $(this).val() == 'dropdown' ) {
+				$('#options-wrap').show();
+			} else {
+				$('#options-wrap').hide();
+			}
+		});
 	});
 </script>
 <div class="modal-dialog">
@@ -52,10 +63,10 @@
 			    	<option value="textarea">Textarea</option>
 			    </select>
 			  </div>
-			  <div class="form-group">
+			  <div id="options-wrap" class="form-group">
 			    <label for="options" class="control-label">Options</label>
 			   	<textarea name="options" id="options" cols="30" rows="5"></textarea>
-			   	<p class="help-block">Comma Separated Value. Example: Yes,No</p>
+			   	<p class="help-block">Example Option Value: Option 1==value1||Option 2==value2</p>
 			  </div>
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>

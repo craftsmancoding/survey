@@ -35,7 +35,7 @@
 			          </tr>
 			        </thead>
 			        <tbody>
-						<?php if (empty($data['surveys']['results'])) : ?>
+						<?php if (!empty($data['surveys']['results'])) : ?>
 							<?php foreach($data['surveys']['results'] as $survey) : ?>
 			                    <tr class="survey-row" data-survey_id="<?php print $survey['survey_id']; ?>">
 						            <td><?php print $survey['survey_id']; ?></td>

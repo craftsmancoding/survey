@@ -1,5 +1,21 @@
 <script>
+	
+	function get_questions() {
+
+		$(".loader-ajax").show();
+		var survey_id = $('#survey_id').val();
+		var url = connector_url + 'show_questions&survey_id='+survey_id;
+		$.ajax({ 
+			type: "GET", 
+			url: url, 
+			success: function(response) { 
+				$('#question-list').html(response);
+				$(".loader-ajax").hide();
+			}   
+		}); 
+	}
 	$(function(){
+		get_questions();
 		$('#update-survey').on('submit',function(e){
 			var values = $(this).serialize();
 			var url = connector_url + 'survey_save';
@@ -21,6 +37,8 @@
 			});
 		    e.preventDefault();
 	    });
+
+
 	});
 </script>
 <div class="cmp-msg">
@@ -83,40 +101,21 @@
 	    <div class="panel-desc">
 			<p>Here you can Create Questions or Choose which Question you wish to edit.</p>
 		</div>
-			<div class="buttons-wrapper">
+			<div class="buttons-wrapper clearfix">
 		            <a class="btn btn-custom" data-toggle="modal" data-target="#question-modal" href="#" >New Question</a>
 			</div>
+			<div class="clear">&nbsp;</div>
 
 			<!-- Modal -->
 			<div class="modal fade" id="question-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<?php print $data['question-create']; ?>
 			</div><!-- /.modal -->
-
-			<table class="table table-hover">
-		        <thead>
-		          <tr>
-		            <th>ID</th>
-		            <th>Name</th>
-		            <th>Type</th>
-		            <th>Active</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-					<?php if (!empty($data['questions']['results'])) : ?>
-							<?php foreach($data['questions']['results'] as $question) : ?>
-			                    <tr>
-						            <td><?php print $question['question_id']; ?></td>
-						            <td><?php print $question['text']; ?></td>
-						            <td><?php print $question['type']; ?></td>
-						            <td><strong><?php print ($question['is_active'] == 1) ? 'Yes' : 'No'; ?></strong></td>
-						        </tr>
-							<?php endforeach; ?>
-						<?php else : ?>
-			                <tr><td style="text-align: center;" colspan="4">No Question Found</td></tr>
-					<?php endif; ?>
-		        </tbody>
-		      </table>
-
+			
+			<div class="loader-ajax">
+				<img src="<?php print $data['loader_path']; ?>" alt="">
+			</div>
+			
+			<div id="question-list"></div>
 	</div>
 
 </div>

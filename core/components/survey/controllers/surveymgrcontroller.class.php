@@ -50,6 +50,29 @@ class SurveyMgrController{
     
     	return $output;
     }
+
+    /**
+    * Format Options
+    * @param string $val
+    * @return json $json_options
+    **/
+    public function format_options($val='') 
+    {
+        $temp_options = array();
+        $arr_options = explode('||', $val);
+        if(is_array($arr_options)) {
+           foreach ($arr_options as $options) {
+                $option = explode('==', $options);
+                if(isset($option[1])) {
+                   $temp_options[$option[1]] = $option[0];
+                } else {
+                    $temp_options = $option;
+                }
+           }  
+        }
+       $json_options = json_encode($temp_options);
+       return $json_options;
+    }
     
     /**
      * Shows all survey in a grid or list.
@@ -66,6 +89,20 @@ class SurveyMgrController{
         ');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('list.php',$data);
+    }
+
+    /**
+     * Shows all survey in a grid or list.
+     *
+     */
+    public function show_questions($args) {
+        $data = array();
+        $survey_id = (int) $this->modx->getOption('survey_id', $args);
+        if (!$Survey = $this->modx->getObject('Survey', $survey_id)) {        
+            return 'Survey not found : '.$survey_id;
+        }
+        $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
+        return $this->_load_view('question-list.php',$data);
     }
 
     /**
@@ -104,6 +141,7 @@ class SurveyMgrController{
             var connector_url = "'.$this->connector_url.'";
             </script>
         ');
+        $data['loader_path'] = $this->assets_url.'components/survey/images/gif-load.gif';
         return $this->_load_view('update.php',$data);
     }
 
@@ -197,6 +235,10 @@ class SurveyMgrController{
                     $out['msg'] = 'Question Field is Required.';  
                     return  json_encode($out);
                 }
+                if(!empty($args['options'])) {
+                    $args['options'] = $this->format_options($args['options']);
+                }
+                
                 $Question = $this->modx->newObject('Question');    
                 $Question->fromArray($args);
                 if (!$Question->save()) {
