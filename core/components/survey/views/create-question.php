@@ -13,18 +13,18 @@
                      data = $.parseJSON(data);
 
 			    	if(data.success == true) {
-			    		$('#modal-msg').addClass('alert-success').html(data.msg).show();
-			    		$("#modal-msg").delay(1000).fadeOut(300);
+			    		$('.modal-msg').addClass('alert-success').html(data.msg).show();
+			    		$(".modal-msg").delay(1200).fadeOut(300);
 			    		window.setTimeout(function(){
 						     $('#question-modal').modal('hide');
-						}, 1000);
+						}, 1200);
 
 						$( document ).on( "hidden.bs.modal", "#question-modal", function() {
 							 get_questions();
 						});
 			    	} else{
-			    		$('#modal-msg').addClass('alert-danger').html(data.msg).show();
-			    		$("#modal-msg").delay(1000).fadeOut(300);
+			    		$('.modal-msg').addClass('alert-danger').html(data.msg).show();
+			    		$(".modal-msg").delay(1000).fadeOut(300);
 			    	}
 			    	
                 }
@@ -39,12 +39,12 @@
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	    <h4 class="modal-title" id="myModalLabel">Create Question</h4>
 	  </div>
-	  <div id="modal-msg" class="alert"></div>
+	  <div class="modal-msg alert"></div>
 	  
 	  	<form id="create-question" class="form-horizontal" role="form">
 		  	<div class="modal-body">
 			  <div class="form-group">
-			  	<input type="hidden" name="survey_id" id="survey_id" value="">
+			  	<input type="hidden" name="survey_id" id="survey_id" value="<?php print $data['survey_id']; ?>">
 			    <label for="question" class="control-label">Question</label>
 			    <input type="text" name="text" class="form-control" id="question" value="">
 			  </div>

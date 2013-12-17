@@ -226,8 +226,7 @@ class SurveyMgrController{
         
         switch ($action) {
             case 'update':
-               /*case 'update':
-                $Question = $this->modx->getObject('Question',$this->modx->getOption('Question_id', $args));
+                $Question = $this->modx->getObject('Question',$this->modx->getOption('question_id', $args));
                 if (!$Question) {
                     $out['success'] = false;
                     $out['msg'] = 'Invalid Question.';
@@ -240,7 +239,7 @@ class SurveyMgrController{
                     $out['Question_id'] = $Question->get('Question_id');
                 }
                 $out['msg'] = 'Question updated successfully.';    
-                break;*/
+                break;
             case 'delete':
                 //Delete Question
                 break;

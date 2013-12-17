@@ -4158,7 +4158,7 @@ button.close {
   font-style: italic;
 }
 
-#modal-msg {
+.modal-msg {
   display: none;
 }
 
