@@ -102,9 +102,21 @@ class SurveyMgrController{
             return 'Survey not found : '.$survey_id;
         }
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
-        $data['question-modal'] = $this->_load_view('question-modal.php',$data);
-
         return $this->_load_view('question-list.php',$data);
+    }
+
+     /**
+     * Get a single question for Ajax update.
+     */
+    public function get_question($args) {
+        $id = (int) $this->modx->getOption('question_id', $args);
+        $Question = $this->modx->getObject('Question',$id);
+        if (!$Question) {
+            return 'Error loading Question. '.print_r($args,true);
+        }
+        $data = $Question->toArray();
+        $data['question-action'] = 'update-question';
+        return $this->_load_view('question-modal.php',$data);
     }
 
     /**
@@ -134,7 +146,11 @@ class SurveyMgrController{
         }
         $data = $Survey->toArray();
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
-        $question_data = array('survey_id'=>$survey_id);
+        $question_data = array(
+            'survey_id'=>$survey_id,
+            'question-action'=>'create-question'
+        );
+        
         $data['question-modal'] = $this->_load_view('question-modal.php',$question_data);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);

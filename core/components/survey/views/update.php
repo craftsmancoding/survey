@@ -102,7 +102,7 @@
 			<p>Here you can Create Questions or Choose which Question you wish to edit.</p>
 		</div>
 			<div class="buttons-wrapper clearfix">
-		            <a class="btn btn-custom" data-toggle="modal" data-target="#question-modal" href="#" >New Question</a>
+		            <a class="btn btn-custom"id="new-question" data-toggle="modal" data-target="#question-modal" href="#" >New Question</a>
 			</div>
 			<div class="clear">&nbsp;</div>
 

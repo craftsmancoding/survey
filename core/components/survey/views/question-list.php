@@ -1,11 +1,20 @@
-<div class="question-list-inner">
 	<script>
 		$(function(){
-			$('question-tbl tr').on('click',function(){
-				
+			$('#question-tbl tr').on('click',function(){
+				//$(".loader-ajax").show();
+				var question_id = $(this).data('question_id');
+				var url = connector_url + 'get_question&question_id='+question_id;
+				$.ajax({ 
+					type: "GET", 
+					url: url, 
+					success: function(response) { 
+						$("#update-question-modal").html(response);
+					}   
+				}); 
 			});
 		});
 	</script>
+<div class="question-list-inner">
 	<table id="question-tbl" class="table table-hover">
 	    <thead>
 	      <tr>
@@ -19,7 +28,7 @@
 
 			<?php if (!empty($data['questions']['results'])) : ?>
 					<?php foreach($data['questions']['results'] as $question) : ?>
-	                    <tr data-toggle="modal" data-target="#update-question-modal">
+	                    <tr data-toggle="modal" data-question_id="<?php print $question['question_id']; ?>" data-target="#update-question-modal">
 				            <td><?php print $question['question_id']; ?></td>
 				            <td><?php print $question['text']; ?></td>
 				            <td><?php print $question['type']; ?></td>
@@ -32,3 +41,5 @@
 	    </tbody>
 	  </table>
 </div>
+
+<div class="modal fade" id="update-question-modal"></div><!--/.modal -->
