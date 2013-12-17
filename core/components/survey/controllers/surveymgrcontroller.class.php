@@ -88,7 +88,7 @@ class SurveyMgrController{
             </script>
         ');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
-        return $this->_load_view('list.php',$data);
+        return $this->_load_view('survey-list.php',$data);
     }
 
     /**
@@ -115,8 +115,7 @@ class SurveyMgrController{
             return 'Error loading Question. '.print_r($args,true);
         }
         $data = $Question->toArray();
-        $data['question-action'] = 'update-question';
-        return $this->_load_view('question-modal.php',$data);
+        return $this->_load_view('update-question.php',$data);
     }
 
     /**
@@ -132,7 +131,7 @@ class SurveyMgrController{
             var mgr_controller_url = "'.$this->mgr_controller_url.'";
             </script>
         ');
-        return $this->_load_view('create.php',$data);
+        return $this->_load_view('create-survey.php',$data);
     }
 
     /**
@@ -148,10 +147,9 @@ class SurveyMgrController{
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
         $question_data = array(
             'survey_id'=>$survey_id,
-            'question-action'=>'create-question'
         );
-        
-        $data['question-modal'] = $this->_load_view('question-modal.php',$question_data);
+
+        $data['question-modal'] = $this->_load_view('create-question.php',$question_data);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
         $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
@@ -160,7 +158,7 @@ class SurveyMgrController{
             </script>
         ');
         $data['loader_path'] = $this->assets_url.'components/survey/images/gif-load.gif';
-        return $this->_load_view('update.php',$data);
+        return $this->_load_view('update-survey.php',$data);
     }
 
     /**

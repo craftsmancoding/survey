@@ -1,8 +1,10 @@
 <script>
 	$(function() {
-		$('#create-question').on('submit',function(e){
+		$('#update-question').on('submit',function(e){
+			alert('test');
 			var values = $(this).serialize();
-           	var survey_id = $('#survey_id').val();
+           	console.log(values);
+           	return false;
 			$.ajax({
                 type: "POST",
                 url: connector_url+"question_save&action=create&survey_id="+survey_id,  
@@ -41,19 +43,19 @@
 	  </div>
 	  <div id="modal-msg" class="alert"></div>
 	  
-	  	<form id="create-question" class="form-horizontal" role="form">
+	  	<form id="update-question>" class="form-horizontal" role="form">
 		  	<div class="modal-body">
 			  <div class="form-group">
-			  	<input type="hidden" name="survey_id" id="survey_id" value="">
+			  	<input type="hidden" name="survey_id" id="survey_id" value="<?php print isset($data['survey_id']) ? $data['survey_id'] : '';  ?>">
 			    <label for="question" class="control-label">Question</label>
-			    <input type="text" name="text" class="form-control" id="question" value="">
+			    <input type="text" name="text" class="form-control" id="question" value="<?php print isset($data['text']) ? $data['text'] : '';  ?>">
 			  </div>
 			  <div class="form-group">
 			    <label for="type" class="control-label">Type</label>
 			    <select name="type" id="type">
-			    	<option value="text" >Text</option>
-			    	<option value="dropdown" >Dropdown</option>
-			    	<option value="textarea" >Textarea</option>
+			    	<option value="text" <?php print isset($data['type']) && $data['type'] == 'text' ? 'selected' : '';  ?>>Text</option>
+			    	<option value="dropdown" <?php print isset($data['type']) && $data['type'] == 'dropdown' ? 'selected' : '';  ?>>Dropdown</option>
+			    	<option value="textarea" <?php print isset($data['type']) && $data['type'] == 'textarea' ? 'selected' : '';  ?>>Textarea</option>
 			    </select>
 			  </div>
 			  <div id="options-wrap" class="form-group">
@@ -64,15 +66,15 @@
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>
 			    <select name="is_active" id="is_active">
-			    	<option value="1" >Yes</option>
-			    	<option value="0" >No</option>
+			    	<option value="1" <?php print isset($data['is_active']) && $data['is_active'] == 1 ? 'selected' : '';  ?>>Yes</option>
+			    	<option value="0" <?php print isset($data['is_active']) && $data['is_active'] == 0 ? 'selected' : '';  ?>>No</option>
 			    </select>
 			  </div>
 			  <div class="form-group">
 			    <label for="is_required" class="control-label">Required</label>
 			    <select name="is_required" id="is_required">
-			    	<option value="1">Yes</option>
-			    	<option value="0">No</option>
+			    	<option value="1" <?php print isset($data['is_required']) && $data['is_required'] == 1 ? 'selected' : '';  ?>>Yes</option>
+			    	<option value="0" <?php print isset($data['is_required']) && $data['is_required'] == 1 ? 'selected' : '';  ?>>No</option>
 			    </select>
 			  </div>
 			
