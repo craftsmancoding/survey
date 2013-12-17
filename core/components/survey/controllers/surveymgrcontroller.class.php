@@ -95,7 +95,8 @@ class SurveyMgrController{
         }
         $data = $Survey->toArray();
         $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
-        $data['question-create'] = $this->_load_view('question-modal.php');
+        $question_data = array('survey_id'=>$survey_id);
+        $data['question-create'] = $this->_load_view('create-question.php',$question_data);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
         $this->modx->regClientStartupScript($this->jquery_url);
         $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
@@ -150,6 +151,60 @@ class SurveyMgrController{
                 }
                 $out['survey_id'] = $this->modx->lastInsertId();
                 $out['msg'] = 'Survey created successfully.';
+        }
+                
+        return json_encode($out);
+    }
+
+    /**
+    * Save the QUestion. $args includes all posted data. "action" determines the action here.
+    *
+    */
+    public function question_save($args) {
+
+        $out = array(
+            'success' => true,
+            'msg' => ''
+        );
+        
+        $action = $this->modx->getOption('action', $args);
+        unset($args['action']);        
+        
+        switch ($action) {
+            case 'update':
+               /*case 'update':
+                $Question = $this->modx->getObject('Question',$this->modx->getOption('Question_id', $args));
+                if (!$Question) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Invalid Question.';
+                    return json_encode($out);
+                }
+                $Question->fromArray($args);
+                if (!$Question->save()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to update Question.';
+                    $out['Question_id'] = $Question->get('Question_id');
+                }
+                $out['msg'] = 'Question updated successfully.';    
+                break;*/
+            case 'delete':
+                //Delete Question
+                break;
+            case 'create':
+            default:
+                if(empty($args['text'])) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Question Field is Required.';  
+                    return  json_encode($out);
+                }
+                $Question = $this->modx->newObject('Question');    
+                $Question->fromArray($args);
+                if (!$Question->save()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to save Question.';    
+                }
+                $out['Question_id'] = $this->modx->lastInsertId();
+                $out['msg'] = 'Question created successfully.';
         }
                 
         return json_encode($out);
