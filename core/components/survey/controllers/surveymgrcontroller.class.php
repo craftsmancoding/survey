@@ -10,12 +10,13 @@ class SurveyMgrController{
     public $connector_url;
     public $mgr_controller_url;
     public $jquery_url;
+    public $mgr_url;
 
     public function __construct($modx) {
           
         $this->modx = &$modx;
         $this->core_path = $this->modx->getOption('survey.core_path','',MODX_CORE_PATH);
-
+        $this->mgr_url = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->modx->addPackage('survey',$this->core_path.'components/survey/model/','survey_');
         $this->assets_url = $this->modx->getOption('survey.assets_url', null, MODX_ASSETS_URL);
         $this->connector_url = $this->assets_url.'components/survey/connector.php?f=';
@@ -25,8 +26,7 @@ class SurveyMgrController{
             $Action = $this->modx->getObject('modAction', array('namespace'=>'survey','controller'=>'controllers/index'));
             $a = $Action->get('id');
         }
-        $this->mgr_controller_url = MODX_MANAGER_URL .'?a='.$a.'&f=';
-
+        $this->mgr_controller_url = $this->mgr_url .'?a='.$a.'&f=';
     }
 
     /**
@@ -90,6 +90,7 @@ class SurveyMgrController{
             </script>
         ');
         $data['mgr_controller_url'] = $this->mgr_controller_url;
+        $data['manager_url'] = $this->mgr_url;
         return $this->_load_view('survey-list.php',$data);
     }
 
@@ -133,6 +134,7 @@ class SurveyMgrController{
             var mgr_controller_url = "'.$this->mgr_controller_url.'";
             </script>
         ');
+        $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('create-survey.php',$data);
     }
 
@@ -161,6 +163,7 @@ class SurveyMgrController{
             </script>
         ');
         $data['loader_path'] = $this->assets_url.'components/survey/images/gif-load.gif';
+        $data['mgr_controller_url'] = $this->mgr_controller_url;
         return $this->_load_view('update-survey.php',$data);
     }
 

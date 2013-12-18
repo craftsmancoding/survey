@@ -22,7 +22,7 @@
 			<div class="cmp-header clearfix">
 				<div class="buttons-wrapper">
 			            <a class="btn btn-custom" href="<?php print $data['mgr_controller_url']; ?>create">Create New Survey</a>
-			        	<a class="btn" href="#">Close</a>
+			        	<a class="btn" href="<?php print $data['manager_url']; ?>">Close</a>
 				</div>
 
 				<table id="survey-list" class="table table-hover">

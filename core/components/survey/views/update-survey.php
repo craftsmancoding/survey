@@ -80,9 +80,9 @@
 			</div>
 				
 			<div class="cmp-buttons-wrapper">
-	                <button type="submit" class="btn" id="survey-create">Save</button>
+	                <button type="submit" class="btn">Save</button>
 	                <button class="btn" id="survey-delete">Delete</button>
-					<a class="btn" href="#">Close</a>
+					<a class="btn" href="<?php print $data['mgr_controller_url']; ?>">Close</a>
 			</div>
 		</div>
 		

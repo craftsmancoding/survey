@@ -45,7 +45,7 @@
 				
 			<div class="cmp-buttons-wrapper">
 	                <button type="submit" class="btn" id="survey-create">Save</button>
-					<a class="btn" href="#">Close</a>
+					<a class="btn" href="<?php print $data['mgr_controller_url']; ?>">Close</a>
 			</div>
 		</div>
 		
