@@ -16,6 +16,9 @@
 	}
 
 	$(function(){
+
+		$('.datepicker').datepicker();
+
 		get_questions();
 		$('#update-survey').on('submit',function(e){
 			var values = $(this).serialize();
@@ -78,6 +81,7 @@
 			<div class="cmp-header-title">
 				<h2>Update Survey</h2>
 			</div>
+
 				
 			<div class="cmp-buttons-wrapper">
 	                <button type="submit" class="btn">Save</button>
@@ -98,11 +102,19 @@
                                 <textarea id="description" class="span8" rows="6" name="description"><?php print $data['description']; ?></textarea>
                             </td>
                             <td style="vertical-align: top;">
-                               
+
                                 <label for="date_open">Date Open</label>
-                                <input class="span4" type="text" id="date_open" name="date_open" value="<?php print $data['date_open']; ?>"/>
+                                <div class="input-append date datepicker" data-date="<?php echo date('Y-m-d') ?>" data-date-format="yyyy-mm-dd">
+                                	<span class="add-on"><i class="icon icon-calendar"></i></span>
+									  <input type="text" name="date_open" id="date_open" class="span3" maxlength="10" value="<?php print date('Y-m-d',strtotime($data['date_open'])); ?>">
+									  
+								</div>
                                 <label for="date_closed">Date Closed</label>
-                                <input class="span4" type="text" id="date_closed" name="date_closed" value="<?php print $data['date_closed']; ?>"/>
+                                 <div class="input-append date datepicker" data-date="<?php echo date('Y-m-d') ?>" data-date-format="yyyy-mm-dd">
+                                	<span class="add-on"><i class="icon icon-calendar"></i></span>
+									  <input type="text" name="date_closed" id="date_closed" class="span3" maxlength="10" value="<?php print date('Y-m-d',strtotime($data['date_closed'])); ?>">
+									  
+								</div>
 								<label for="is_active">Is Active</label>
 								<select class="span2" name="is_active" id="is_active">
 									<option value="1" <?php print $data['is_active'] == 1 ? 'selected' : '' ; ?>>Yes</option>

@@ -128,7 +128,9 @@ class SurveyMgrController{
     {
         $data = array();
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
+        $this->modx->regClientCSS($this->assets_url . 'components/survey/css/datepicker.css');
         $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap-datepicker.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
             var connector_url = "'.$this->connector_url.'";
             var mgr_controller_url = "'.$this->mgr_controller_url.'";
@@ -155,7 +157,9 @@ class SurveyMgrController{
 
         $data['question-modal'] = $this->_load_view('create-question.php',$question_data);
         $this->modx->regClientCSS($this->assets_url . 'components/survey/css/mgr.css');
+        $this->modx->regClientCSS($this->assets_url . 'components/survey/css/datepicker.css');
         $this->modx->regClientStartupScript($this->jquery_url);
+        $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap-datepicker.js');
         $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
             var connector_url = "'.$this->connector_url.'";

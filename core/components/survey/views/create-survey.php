@@ -1,5 +1,8 @@
 <script>
 	$(function() {
+
+		$('.datepicker').datepicker();
+
 		$('#create-survey').on('submit',function(e){
 			var values = $(this).serialize();
 			console.log(values);
@@ -62,9 +65,17 @@
                             <td style="vertical-align: top;">
                                
                                 <label for="date_open">Date Open</label>
-                                <input class="span4" type="text" id="date_open" name="date_open" value=""/>
+                                <div class="input-append date datepicker" data-date="<?php echo date('Y-m-d') ?>" data-date-format="yyyy-mm-dd">
+                                	<span class="add-on"><i class="icon icon-calendar"></i></span>
+									  <input type="text" name="date_open" id="date_open" class="span3" maxlength="10" value="">
+									  
+								</div>
                                 <label for="date_closed">Date Closed</label>
-                                <input class="span4" type="text" id="date_closed" name="date_closed" value=""/>
+                                 <div class="input-append date datepicker" data-date="<?php echo date('Y-m-d') ?>" data-date-format="yyyy-mm-dd">
+                                	<span class="add-on"><i class="icon icon-calendar"></i></span>
+									  <input type="text" name="date_closed" id="date_closed" class="span3" maxlength="10" value="">
+									  
+								</div>
 								<label for="is_active">Is Active</label>
 								<select class="span2" name="is_active" id="is_active">
 									<option value="1">Yes</option>
