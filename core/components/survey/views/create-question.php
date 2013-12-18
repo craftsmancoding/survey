@@ -20,6 +20,8 @@
 						}, 1200);
 
 						$( document ).on( "hidden.bs.modal", "#question-modal", function() {
+							$('.form-control').val('');
+							$('#create-question select').prop('selectedIndex',0);
 							 get_questions();
 						});
 			    	} else{
