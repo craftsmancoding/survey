@@ -12,6 +12,7 @@ class SurveyMgrController{
     public $jquery_url;
 
     public function __construct($modx) {
+          
         $this->modx = &$modx;
         $this->core_path = $this->modx->getOption('survey.core_path','',MODX_CORE_PATH);
 
@@ -25,6 +26,7 @@ class SurveyMgrController{
             $a = $Action->get('id');
         }
         $this->mgr_controller_url = MODX_MANAGER_URL .'?a='.$a.'&f=';
+
     }
 
     /**
@@ -155,6 +157,7 @@ class SurveyMgrController{
         $this->modx->regClientStartupScript($this->assets_url.'components/survey/js/bootstrap.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
             var connector_url = "'.$this->connector_url.'";
+             var mgr_controller_url = "'.$this->mgr_controller_url.'";
             </script>
         ');
         $data['loader_path'] = $this->assets_url.'components/survey/images/gif-load.gif';
@@ -193,7 +196,20 @@ class SurveyMgrController{
                 $out['msg'] = 'Survey updated successfully.';    
                 break;
             case 'delete':
-                //Delete Survey
+                $survey_id = $this->modx->getOption('survey_id', $args);
+                $Survey = $this->modx->getObject('Survey',$survey_id);
+                if (!$this->modx->removeCollection('Question',array('survey_id'=>$survey_id))) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Survey deleted successfully.Failed to delete Related Questions.';  
+                    return json_encode($out);  
+                }
+
+                if (!$Survey->remove()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to delete Survey.';    
+                } 
+                
+                $out['msg'] = 'Survey deleted successfully.';
                 break;
             case 'create':
             default:

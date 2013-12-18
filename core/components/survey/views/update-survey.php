@@ -14,6 +14,7 @@
 			}   
 		}); 
 	}
+
 	$(function(){
 		get_questions();
 		$('#update-survey').on('submit',function(e){
@@ -38,6 +39,25 @@
 		    e.preventDefault();
 	    });
 
+	    $('#survey-delete').on('click', function() {
+		  	if(confirm('Are you sure you want to delete this Survey? Questions associated will also be removed.')) {
+				var url = connector_url + 'survey_save';
+				var survey_id = $('#survey_id').val();
+	            $.post( url+"&action=delete", { survey_id: survey_id }, function( data ){
+			    	data = $.parseJSON(data);
+			    	console.log(data);
+			    	if(data.success == true) {
+						window.location.href = mgr_controller_url;
+			    	} else{
+			    		$('#cmp-result').html('Error');                
+			       		$('#msg').addClass('error');
+			    		$(".moxy-msg").delay(3200).fadeOut(300);
+			    	}
+			    } );
+	        }
+			return false;
+		});
+
 
 	});
 </script>
@@ -58,6 +78,7 @@
 				
 			<div class="cmp-buttons-wrapper">
 	                <button type="submit" class="btn" id="survey-create">Save</button>
+	                <button class="btn" id="survey-delete">Delete</button>
 					<a class="btn" href="#">Close</a>
 			</div>
 		</div>
