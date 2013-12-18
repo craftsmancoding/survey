@@ -257,7 +257,14 @@ class SurveyMgrController{
                 $out['msg'] = 'Question updated successfully.';    
                 break;
             case 'delete':
-                //Delete Question
+                $question_id = $this->modx->getOption('question_id', $args);
+                $Question = $this->modx->getObject('Question',$question_id);
+                if (!$Question->remove()) {
+                    $out['success'] = false;
+                    $out['msg'] = 'Failed to delete Question.';    
+                } 
+                
+                $out['msg'] = 'Question deleted successfully.';
                 break;
             case 'create':
             default:

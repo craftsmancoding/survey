@@ -29,6 +29,31 @@
            });
 		    e.preventDefault();
 	    });
+
+	   	$('#question-delete').on('click', function() {
+		  	if(confirm('Are you sure you want to delete this Question?')) {
+				var url = connector_url + 'question_save';
+				var question_id = $('#question_id').val();
+	            $.post( url+"&action=delete", { question_id: question_id }, function( data ){
+			    	data = $.parseJSON(data);
+			    	if(data.success == true) {
+			    		$('.modal-msg').addClass('alert-success').html(data.msg).show();
+			    		$(".modal-msg").delay(1000).fadeOut(300);
+						window.setTimeout(function(){
+						     $('#update-question-modal').modal('hide');
+						}, 1000);
+						$( document ).on( "hidden.bs.modal", "#update-question-modal", function() {
+							 get_questions();
+						});
+			    	} else{
+			    		$('.modal-msg').addClass('alert-danger').html(data.msg).show();
+			    		$(".modal-msg").delay(3200).fadeOut(300);
+			    	}
+			    } );
+	        }
+			return false;
+		});
+
 	});
 </script>
 <div class="modal-dialog">
@@ -78,6 +103,7 @@
 		  </div>
 		  <div class="modal-footer">
 		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		     <button class="btn" id="question-delete">Delete</button>
 		    <button type="submit" id="save-question"  class="btn btn-custom">Save changes</button>
 		  </div>
 	  </form>

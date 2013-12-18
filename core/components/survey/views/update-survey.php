@@ -45,7 +45,6 @@
 				var survey_id = $('#survey_id').val();
 	            $.post( url+"&action=delete", { survey_id: survey_id }, function( data ){
 			    	data = $.parseJSON(data);
-			    	console.log(data);
 			    	if(data.success == true) {
 						window.location.href = mgr_controller_url;
 			    	} else{
@@ -56,6 +55,10 @@
 			    } );
 	        }
 			return false;
+		});
+
+		$('#new-question').on('click',function(){
+			$('#create-question').reset();
 		});
 
 
