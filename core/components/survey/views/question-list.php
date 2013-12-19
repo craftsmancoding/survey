@@ -36,7 +36,7 @@
 				        </tr>
 					<?php endforeach; ?>
 				<?php else : ?>
-	                <tr><td style="text-align: center;" colspan="4">No Question Found</td></tr>
+	                <tr><td style="text-align: center;" colspan="4">You have not created any questions for this survey yet.</td></tr>
 			<?php endif; ?>
 	    </tbody>
 	  </table>

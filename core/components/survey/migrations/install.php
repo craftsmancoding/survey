@@ -6,7 +6,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Core path: '.$core_path);
 
 $manager = $modx->getManager();
 
-$generator = $manager->getGenerator();
+//$generator = $manager->getGenerator();
 
 // Use this to generate classes and maps from your schema
 /*

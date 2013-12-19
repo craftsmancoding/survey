@@ -60,7 +60,7 @@
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	    <h4 class="modal-title" id="myModalLabel">Update Question</h4>
+	    <h4 class="modal-title" id="myModalLabel">Update Question (<?php print $data['question_id']; ?>)</h4>
 	  </div>
 	  <div class="modal-msg alert">test</div>
 	  
@@ -85,6 +85,11 @@
 			   	<input type="text" name="options" id="options" value="<?php print htmlentities($data['options']); ?>">
 			   	<p class="help-block">Example Option Value: {"m":"Male","f":"Female"}</p>
 			  </div>
+			  <div class="form-group">
+			    <label for="default" class="control-label">Default Value</label>
+			   	<input type="text" name="default" id="default" value="<?php print htmlentities($data['default']); ?>">
+			  </div>
+
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>
 			    <select name="is_active" id="is_active">

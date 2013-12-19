@@ -11,6 +11,7 @@ $xpdo_meta_map['Question']= array (
     'user_id' => NULL,
     'text' => '',
     'type' => 'text',
+    'default' => '',
     'options' => NULL,
     'page' => NULL,
     'is_active' => 1,
@@ -61,6 +62,15 @@ $xpdo_meta_map['Question']= array (
       'default' => 'text',
       'null' => false,
       'comment' => 'Identifies the type of response (e.g. text, dropdown)',
+    ),
+    'default' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'default' => '',
+      'null' => false,
+      'comment' => 'Prepopulate the field',
     ),
     'options' => 
     array (

@@ -135,7 +135,7 @@
 
 	<div class="well">
 	    <div class="panel-desc">
-			<p>Here you can Create Questions or Choose which Question you wish to edit.</p>
+			<p>Here you can create or edit questions for your survey.</p>
 		</div>
 			<div class="buttons-wrapper clearfix">
 		            <a class="btn btn-custom"id="new-question" data-toggle="modal" data-target="#question-modal" href="#" >New Question</a>

@@ -104,7 +104,7 @@ class SurveyMgrController{
         if (!$Survey = $this->modx->getObject('Survey', $survey_id)) {        
             return 'Survey not found : '.$survey_id;
         }
-        $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
+        $data['questions'] = $this->json_questions(array('survey_id'=>$survey_id),true);
         return $this->_load_view('question-list.php',$data);
     }
 
@@ -150,7 +150,7 @@ class SurveyMgrController{
             return 'Survey not found : '.$survey_id;
         }
         $data = $Survey->toArray();
-        $data['questions'] = $this->json_questions(array('is_active'=>1,'survey_id'=>$survey_id),true);
+        $data['questions'] = $this->json_questions(array('survey_id'=>$survey_id),true);
         $question_data = array(
             'survey_id'=>$survey_id,
         );
