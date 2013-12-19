@@ -12,19 +12,24 @@
 		<div id="cmp-result"></div>
 		<div id="cmp-result-msg"></div>
 	</div>
-		<div class="header-title">
-			<h2>Surveys</h2>
+
+
+		<div class="cmp-header clearfix">
+			<div class="cmp-header-title">
+				<h2>Surveys</h2>
+			</div>
+				
+			<div class="cmp-buttons-wrapper">
+	            <a class="btn btn-custom" href="<?php print $data['mgr_controller_url']; ?>create">Create New Survey</a>
+			    <a class="btn" href="<?php print $data['manager_url']; ?>">Close</a>
+			</div>
 		</div>
+
 		<div class="well">
 			<div class="x-panel-body panel-desc x-panel-body-noheader x-panel-body-noborder" id="ext-gen68" >
 				<p>Here you can Create New Survey or Choose which Survey you wish to edit.</p>
 			</div>
 			<div class="cmp-header clearfix">
-				<div class="buttons-wrapper">
-			            <a class="btn btn-custom" href="<?php print $data['mgr_controller_url']; ?>create">Create New Survey</a>
-			        	<a class="btn" href="<?php print $data['manager_url']; ?>">Close</a>
-				</div>
-
 				<table id="survey-list" class="table table-hover">
 			        <thead>
 			          <tr>
