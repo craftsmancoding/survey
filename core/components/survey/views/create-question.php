@@ -48,7 +48,7 @@
 			  <div class="form-group">
 			  	<input type="hidden" name="survey_id" id="survey_id" value="<?php print $data['survey_id']; ?>">
 			    <label for="question" class="control-label">Question</label>
-			    <input type="text" name="text" class="form-control" id="question" value="">
+			   	<textarea name="text" id="text" id="question"cols="30" rows="5"></textarea>
 			  </div>
 			  <div class="form-group">
 			    <label for="type" class="control-label">Type</label>
@@ -60,8 +60,9 @@
 			  </div>
 			  <div id="options-wrap" class="form-group">
 			    <label for="options" class="control-label">Options</label>
-			   	<textarea name="options" id="options" cols="30" rows="5"></textarea>
-			   	<p class="help-block">Example Option Value: Option 1==value1||Option 2==value2</p>
+			     <input type="text" name="options" id="options" value="">
+			    
+			   	<p class="help-block">Example Option Value: {"m":"Male","f":"Female"}</p>
 			  </div>
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>

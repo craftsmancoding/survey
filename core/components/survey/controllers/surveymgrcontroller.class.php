@@ -280,9 +280,6 @@ class SurveyMgrController{
                     $out['msg'] = 'Question Field is Required.';  
                     return  json_encode($out);
                 }
-                if(!empty($args['options'])) {
-                    $args['options'] = $this->format_options($args['options']);
-                }
                 
                 $Question = $this->modx->newObject('Question');    
                 $Question->fromArray($args);
