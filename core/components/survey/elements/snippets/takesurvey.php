@@ -16,7 +16,9 @@
  * &prefix (string) used as a prefix for placeholders that are set.
  * &action (integer) page id of where to submit the form to. Optional. Default: the id of the current page.
  * &onComplete (string) comma-separated list of Snippets to execute on completion of the survey.
- *
+ * &redirect (integer) page id to forward to on completion
+ * &toPlaceholders (integer) if set, the snippet won't return output, it will only set placeholders
+ * 
  * INPUT FILTERS
  *
  * get, post, --custom snippet--
@@ -78,6 +80,7 @@ $prefix = $modx->getOption('prefix', $scriptProperties,'');
 $onComplete = $modx->getOption('onComplete', $scriptProperties,'');
 $action = $modx->getOption('action', $scriptProperties,$modx->resource->get('id'));
 $page = $modx->getOption('page', $scriptProperties,0);
+$toPlaceholders = $modx->getOption('toPlaceholders', $scriptProperties);
 
 // Verify the survey
 $Survey = $modx->getObject('Survey', array('survey_id' => $survey_id,'is_active'=>1));
@@ -218,6 +221,10 @@ foreach ($Questions as $Q) {
 }
 
 $props['elements'] = $out;
+
+if ($toPlaceholders) {
+    return '';
+}
 
 $tpl = file_get_contents($core_path.'components/survey/elements/chunks/form.tpl');
 $chunk = $modx->newObject('modChunk', array('name' => "{tmp}-{$uniqid}"));
