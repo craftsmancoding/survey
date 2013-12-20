@@ -75,9 +75,11 @@
 			  <div class="form-group">
 			    <label for="type" class="control-label">Type</label>
 			    <select name="type" id="type">
-			    	<option value="text" <?php print $data['type'] == 'text' ? 'selected' : '';  ?>>Text</option>
-			    	<option value="dropdown" <?php print $data['type'] == 'dropdown' ? 'selected' : '';  ?>>Dropdown</option>
-			    	<option value="textarea" <?php print $data['type'] == 'textarea' ? 'selected' : '';  ?>>Textarea</option>
+			    	<option value="text"<?php print $data['type'] == 'text' ? ' selected="selected"' : '';  ?>>Text</option>
+			    	<option value="dropdown"<?php print $data['type'] == 'dropdown' ? ' selected="selected"' : '';  ?>>Dropdown</option>
+			    	<option value="textarea"<?php print $data['type'] == 'textarea' ? ' selected="selected"' : '';  ?>>Textarea</option>
+			        <option value="radio"<?php print $data['type'] == 'radio' ? ' selected="selected"' : '';  ?>>Radio</option>
+			    	<option value="checkbox"<?php print $data['type'] == 'checkbox' ? ' selected="selected"' : '';  ?>>Checkbox</option>
 			    </select>
 			  </div>
 			  <div id="options-wrap" class="form-group">
@@ -89,19 +91,22 @@
 			    <label for="default" class="control-label">Default Value</label>
 			   	<input type="text" name="default" id="default" value="<?php print htmlentities($data['default']); ?>">
 			  </div>
-
+              <div class="form-group">
+			    <label for="page" class="control-label">Page</label>
+			     <input type="text" name="page" id="page" value="<?php print htmlentities($data['page']); ?>">
+			  </div>
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>
 			    <select name="is_active" id="is_active">
-			    	<option value="1" <?php print $data['is_active'] == 1 ? 'selected' : '';  ?>>Yes</option>
-			    	<option value="0" <?php print $data['is_active'] == 0 ? 'selected' : '';  ?>>No</option>
+			    	<option value="1"<?php print $data['is_active'] == 1 ? ' selected="selected"' : '';  ?>>Yes</option>
+			    	<option value="0"<?php print $data['is_active'] == 0 ? ' selected="selected"' : '';  ?>>No</option>
 			    </select>
 			  </div>
 			  <div class="form-group">
 			    <label for="is_required" class="control-label">Required</label>
 			    <select name="is_required" id="is_required">
-			    	<option value="1" <?php print $data['is_required'] == 1 ? 'selected' : '';  ?>>Yes</option>
-			    	<option value="0" <?php print $data['is_required'] == 0 ? 'selected' : '';  ?>>No</option>
+			    	<option value="1"<?php print $data['is_required'] == 1 ? ' selected="selected"' : '';  ?>>Yes</option>
+			    	<option value="0"<?php print $data['is_required'] == 0 ? ' selected="selected"' : '';  ?>>No</option>
 			    </select>
 			  </div>
 			

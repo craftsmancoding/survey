@@ -2,3 +2,4 @@
 <select name="[[+name]]" class="survey_dropdown" id="[[+id]]">
 [[+options]]
 </select>
+<br/>

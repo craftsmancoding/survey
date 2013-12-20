@@ -53,9 +53,11 @@
 			  <div class="form-group">
 			    <label for="type" class="control-label">Type</label>
 			    <select name="type" id="type">
-			    	<option value="text" >Text</option>
-			    	<option value="dropdown" >Dropdown</option>
-			    	<option value="textarea" >Textarea</option>
+			    	<option value="text">Text</option>
+			    	<option value="dropdown">Dropdown</option>
+			    	<option value="textarea">Textarea</option>
+			    	<option value="radio">Radio</option>
+			    	<option value="checkbox">Checkbox</option>
 			    </select>
 			  </div>
 			  <div id="options-wrap" class="form-group">
@@ -63,6 +65,10 @@
 			     <input type="text" name="options" id="options" value="">
 			    
 			   	<p class="help-block">Example Option Value: {"m":"Male","f":"Female"}</p>
+			  </div>
+			  <div class="form-group">
+			    <label for="page" class="control-label">Page</label>
+			     <input type="text" name="page" id="page" value="">
 			  </div>
 			  <div class="form-group">
 			    <label for="is_active" class="control-label">Active</label>

@@ -22,6 +22,8 @@ $xpdo_meta_map['Data']= array (
       'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
+      'index' => 'pk',
+      'generated' => 'native',
     ),
     'survey_id' => 
     array (

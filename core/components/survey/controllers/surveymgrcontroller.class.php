@@ -195,6 +195,7 @@ class SurveyMgrController{
                     return json_encode($out);
                 }
                 $Survey->fromArray($args);
+                $Survey->set('timestamp_modifield',date('Y-m-d H:i:s'));
                 if (!$Survey->save()) {
                     $out['success'] = false;
                     $out['msg'] = 'Failed to update Survey.';
@@ -256,6 +257,7 @@ class SurveyMgrController{
                     return json_encode($out);
                 }
                 $Question->fromArray($args);
+                $Question->set('timestamp_modified', date('Y-m-d H:i:s'));
                 if (!$Question->save()) {
                     $out['success'] = false;
                     $out['msg'] = 'Failed to update Question.';

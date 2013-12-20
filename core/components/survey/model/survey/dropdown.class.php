@@ -30,6 +30,16 @@ class Dropdown extends FieldElement {
                 $props['options'] .= '<option value="'.htmlspecialchars($k).'"'.$is_selected.'>'.htmlspecialchars($v).'</option>';
             }
         }
+        elseif (preg_match('/^(\d+)\-(\d+)$/',$question->get('options'),$m)) {
+            for ( $i= $m[1]; $i <= $m[2]; $i++ ) {
+                $is_selected = '';
+                if ($i == $props['value']) {
+                    $this->modx->setPlaceholder($this->config['namespace'].'.'.$i.'.selected', ' selected="selected"');
+                    $is_selected = ' selected="selected"';
+                }
+                $props['options'] .= '<option value="'.htmlspecialchars($i).'"'.$is_selected.'>'.htmlspecialchars($i).'</option>';            
+            }
+        }
         $props['value'] = htmlspecialchars($props['value']);
         return $chunk->process($props, $tpl);
     }

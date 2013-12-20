@@ -75,7 +75,7 @@
     <!-- ! Data -->
     <!-- Individual response to a single question -->
 	<object class="Data" table="data" extends="xPDOObject">
-		<field key="data_id" dbtype="int" precision="11" phptype="integer" null="false"/>
+		<field key="data_id" dbtype="int" precision="11" phptype="integer" null="false" index="pk"  generated="native" />
         <field key="survey_id" dbtype="int" precision="11" phptype="integer" null="false"/>
         <field key="response_id" dbtype="int" precision="11" phptype="integer" null="false"/>
         <field key="question_id" dbtype="int" precision="11" phptype="integer" null="false"/>
