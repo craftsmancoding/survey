@@ -33,7 +33,7 @@
         <field key="text" dbtype="mediumtext" phptype="string" null="false" default="" comment="The actual question"/>
         <field key="type" dbtype="varchar" precision="16" phptype="string" default="text" null="false" comment="Identifies the type of response (e.g. text, dropdown)"/>
         <field key="default" dbtype="varchar" precision="255" phptype="string" default="" null="false" comment="Prepopulate the field"/>
-        <field key="options" dbtype="varchar" precision="255" phptype="string" null="true" comment="optionally used by some types, e.g. dropdown req's a list of options"/>
+        <field key="options" dbtype="mediumtext" phptype="string" null="true" comment="optionally used by some types, e.g. dropdown req's a list of options"/>
         <field key="page" dbtype="int" precision="11" phptype="integer" null="false" comment="optionally used to group questions into pages"/>
         <field key="is_active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" comment="Used to disable/enable products"/>
         <field key="is_required" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" comment="Required Qs must be answered before the survey can be completed."/>        
