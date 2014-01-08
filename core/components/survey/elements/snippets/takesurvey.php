@@ -1,6 +1,7 @@
 <?php
 /**
- * takeSurvey
+ * @name takeSurvey
+ * @description Display survey questions to the user.
  *
  * Display a survey's questions to the user.  The user doesn't need to be logged in, but logging in does
  * help uniquely identify the user.  The "response" object identifies a unique survey response, i.e. 
@@ -34,9 +35,6 @@
  * To listen for post data in the "survey_id" field (no default supplied)
  *
  *      &survey=`survey_id:post`
- *
- * @name takeSurvey
- * @description 
  *
  */
 define('SURVEY_RESPONSE_SESSION_KEY', 'response.identifier');

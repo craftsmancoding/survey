@@ -1,8 +1,7 @@
 <?php
 /**
- * viewResponse
- *
- * Display a single response to a survey.
+ * @name viewResponse
+ * @description Display a single response to a survey.
  *
  * PARAMETERS
  *
@@ -27,8 +26,6 @@
  *
  *      &response_id=`response_id:post`
  *
- * @name viewResponse
- * @description 
  *
  */
 
