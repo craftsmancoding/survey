@@ -1,9 +1,10 @@
 <?php
-return array(
+/*return array(
+
     array(
         'text'=>'Survey',
         'parent'=>'components',
-        'action' => 0, // needs a placeholder value to avoid warnings: will update to fk from Action object
+//        'action' => 0, // needs a placeholder value to avoid warnings: will update to fk from Action object
         'description' => 'Create and Manage Surveys',
         'icon'=>'',
         'menuindex'=>'',
@@ -11,6 +12,7 @@ return array(
         'handler'=>'',
         'permissions'=>'',
         'Action' => array(
+            'action' => 0,
             'namespace' => 'survey',
             'controller' => 'controllers/index',
             'haslayout' => '',
@@ -19,5 +21,7 @@ return array(
             
         )
     ),
+
 );
+*/
 /*EOF*/
