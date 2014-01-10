@@ -28,27 +28,22 @@ class Dropdown extends FieldElement {
         $props['label'] = $question->get('text');
         $props['options'] = '';
         $props['value.label'] = ''; // if the value is "m", the value.label is "male"
-        
+
         $options = json_decode($question->get('options'),true);
-//        print_r($options); exit;
-/*
-        if (is_array($options)) {
-            foreach($options as $k => $v) {
-         
-                $props['options'] .="<li data-value='".htmlspecialchars($k)."'>".htmlspecialchars($v)."</li>";
-                //$props['options'] .= '<option class="testing1" value="'.htmlspecialchars($k).'"'.$is_selected.'>'.htmlspecialchars($v).'</option>';
-            }
-        }
-*/
 
         // For regular array options
         if (is_array($options)) {
             foreach($options as $k => $v) {
+                $v = trim($v);
                 $is_selected = '';
-                if ($v == $props['value']) {
+                if ($k == $props['value']) {
                     $this->modx->setPlaceholder($this->config['namespace'].'.'.$k.'.selected', ' selected="selected"');
+                    $this->placeholders[] = $this->config['namespace'].'.'.$k.'.selected';
                     $is_selected = ' selected="selected"';
                     $props['value.label'] = $v;
+                    $this->modx->setPlaceholder($this->config['namespace'].'value.label', $v);
+                    $this->placeholders[] = $this->config['namespace'].'value.label';
+                    error_log($this->config['namespace'].'.value.label '.$v);
                 }
                 
                 //$props['options'] .= '<option value="'.htmlspecialchars($k).'"'.$is_selected.'>'.$v.'</option>';
@@ -65,7 +60,10 @@ class Dropdown extends FieldElement {
                 $is_selected = '';
                 if ($i == $props['value']) {
                     $this->modx->setPlaceholder($this->config['namespace'].'.'.$i.'.selected', ' selected="selected"');
+                    $this->placeholders[] = $this->config['namespace'].'.'.$i.'.selected';
                     $is_selected = ' selected="selected"';
+                    $this->modx->setPlaceholder($this->config['namespace'].'value.label', $i);
+                    $this->placeholders[] = $this->config['namespace'].'value.label';
                 }
                 //$props['options'] .= '<option value="'.htmlspecialchars($i).'"'.$is_selected.'>'.htmlspecialchars($i).'</option>';            
                 $props['options'] .= str_replace(
