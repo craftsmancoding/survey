@@ -19,5 +19,6 @@ return array(
     'repo_url' => 'https://github.com/craftsmancoding/survey/',
     'copyright' => '2014',
     'category' => 'Survey',
+    'seed' => array('base'),
 );
 /*EOF*/
